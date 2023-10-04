@@ -34,9 +34,14 @@ $money_app $mol_view
 									mask \__\__
 								<= Card_csv $mol_format
 									mask \___
-				duel <= Duel_page $mol_page
-					title \Дуэль
+				duel <= Caravan_page $mol_page
+					title \Караван
 					body /
-						<= Duel_amount $mol_string
-						<= Duel_search $mol_button_major
-							title \Найти противника
+						<= Caravan_form $mol_form_draft
+							form_fields /
+								<= Caravan_amount $mol_number
+									hint \Золотишко
+							buttons /
+								<= Caravan_search $mol_button_major
+									title \Грабить караван
+						<= Caravan_result $mol_text text \Нет подходящего каравана
