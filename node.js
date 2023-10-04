@@ -11096,7 +11096,7 @@ var $;
             obj.spreads = () => ({
                 skills: this.Skills_page(),
                 card: this.Card_page(),
-                duel: this.Caravan_page()
+                caravan: this.Caravan_page()
             });
             return obj;
         }
