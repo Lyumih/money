@@ -4,9 +4,13 @@ $money_app $mol_view
 		<= Auth_page $mol_page
 			title \Войти
 			body /
-				- <= Email $mol_string
-				<= Login $mol_button_major
-					title \Войти
+				<= Auth_form $mol_form_draft
+					form_fields /
+						<= Email $mol_string hint \Логин
+						<= Password $mol_string hint \Пароль
+					buttons /
+						<= Login $mol_button_major
+							title \Войти
 		<= Game_page $mol_book2_catalog
 			menu_title \Игра
 			param \page
@@ -22,12 +26,14 @@ $money_app $mol_view
 				card <= Card_page $mol_page
 					title \Карта
 					body /
-						<= Card_code $mol_format
-							mask \____ ____ ____ ____
-						<= Card_date $mol_format
-							mask \__\__
-						<= Card_csv $mol_format
-							mask \___
+						<= Card $mol_form_draft
+							form_fields /
+								<= Card_code $mol_format
+									mask \____ ____ ____ ____
+								<= Card_date $mol_format
+									mask \__\__
+								<= Card_csv $mol_format
+									mask \___
 				duel <= Duel_page $mol_page
 					title \Дуэль
 					body /
