@@ -15,23 +15,29 @@ $money_app $mol_view
 			menu_title \Игра
 			param \page
 			menu_foot /
-				<= Money_count $mol_text text? <= money? \1000
+				<= Money_count $mol_text text? <= money? \1000 монет
 			menu_tools /
 				<= GitHub $mol_link_source uri \https://github.com/Lyumih/money
 			spreads *
 				skills <= Skills_page $mol_page
 					title \Умения
 					body /
-						- <= Skill_card_balance_item $mol_button_minor title \Проверить баланс
+						<= Skill_new $mol_button_major
+							title \Изучить новое умение
 						<= Skill_card_registration_item $mol_expander
 							title \Зарегистрировать карту
 							content /
-								<= Skill_link $mol_link_iconed
+								<= Skill_link $mol_link
 									uri \https://redoc.bankingapi.ru/client-account-info/
 									title \Книна знаний
 								<= Skill_form $mol_form_draft
 									form_fields /
-										<= Skill_registration_test $mol_textarea
+										<= Skill_registration_url $mol_string
+											hint \url
+										<= Skill_registration_method $mol_string
+											hint \Метод
+										<= Skill_registration_body $mol_textarea
+											hint \Данные
 									buttons /
 										<= Skill_save $mol_button_major
 											title \Изучить
@@ -61,10 +67,9 @@ $money_app $mol_view
 									title \Грабить караван
 						<= Caravan_result $mol_text text \Нет подходящего каравана
 				balance <= Balance_page $mol_page
-					title \Баланс
+					title \Боги
 					body /
 						<= Balance_text $mol_text text \
-							\# Баланс в мире
 							\# Бог Капитал
 							\- Адептов: 80
 							\- Караванов: 80 000 руб
