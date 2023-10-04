@@ -9372,6 +9372,58 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $money_app_god extends $mol_page {
+        title() {
+            return "Боги";
+        }
+        body() {
+            return [
+                this.Balance_text()
+            ];
+        }
+        balance_text(next) {
+            if (next !== undefined)
+                return next;
+            return "";
+        }
+        Balance_text() {
+            const obj = new this.$.$mol_text();
+            obj.text = () => this.balance_text();
+            return obj;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $money_app_god.prototype, "balance_text", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_god.prototype, "Balance_text", null);
+    $.$money_app_god = $money_app_god;
+})($ || ($ = {}));
+//money/app/god/-view.tree/god.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $money_app_god extends $.$money_app_god {
+            balance_text(next) {
+                const result = this.$.$money_fetch.json('/god/balance');
+                return result.gods.map(god => `# Бог ${god.name}\n- Адептов: ${god.adepts}\n- Караванов: ${god.caravans} руб`).join('\n');
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $money_app_god.prototype, "balance_text", null);
+        $$.$money_app_god = $money_app_god;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//money/app/god/god.view.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_book2 extends $mol_scroll {
         menu_title() {
             return "";
@@ -10420,6 +10472,55 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_text_list extends $mol_text {
+        auto_scroll() {
+            return null;
+        }
+        attr() {
+            return {
+                ...super.attr(),
+                mol_text_list_type: this.type()
+            };
+        }
+        Paragraph(id) {
+            const obj = new this.$.$mol_text_list_item();
+            obj.index = () => this.item_index(id);
+            obj.sub = () => this.block_content(id);
+            return obj;
+        }
+        type() {
+            return "";
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $mol_text_list.prototype, "Paragraph", null);
+    $.$mol_text_list = $mol_text_list;
+    class $mol_text_list_item extends $mol_paragraph {
+        attr() {
+            return {
+                ...super.attr(),
+                mol_text_list_item_index: this.index()
+            };
+        }
+        index() {
+            return 0;
+        }
+    }
+    $.$mol_text_list_item = $mol_text_list_item;
+})($ || ($ = {}));
+//mol/text/list/-view.tree/list.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/text/list/list.view.css", "[mol_text_list] {\r\n\tpadding-left: 1.75rem;\r\n}\r\n\r\n[mol_text_list_item] {\r\n\tcontain: none;\r\n\tdisplay: list-item;\r\n}\r\n\r\n[mol_text_list_item]::before {\r\n\tcontent: attr( mol_text_list_item_index ) \".\";\r\n\twidth: 1.25rem;\r\n\tdisplay: inline-block;\r\n\tposition: absolute;\r\n\tmargin-left: -1.75rem;\r\n\ttext-align: end;\r\n}\r\n\r\n[mol_text_list_type=\"-\"] > [mol_text_list_item]::before,\r\n[mol_text_list_type=\"*\"] > [mol_text_list_item]::before {\r\n\tcontent: \"•\";\r\n}\r\n");
+})($ || ($ = {}));
+//mol/text/list/-css/list.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $money_app extends $mol_view {
         title() {
             return "Money Card Hero";
@@ -10579,17 +10680,8 @@ var $;
             ];
             return obj;
         }
-        Balance_text() {
-            const obj = new this.$.$mol_text();
-            obj.text = () => "# Бог Капитал\n- Адептов: 80\n- Караванов: 80 000 руб\n# Бог Коммунизма\n- Адептов: 20\n- Караванов: 20 000 руб";
-            return obj;
-        }
-        Balance_page() {
-            const obj = new this.$.$mol_page();
-            obj.title = () => "Боги";
-            obj.body = () => [
-                this.Balance_text()
-            ];
+        God_page() {
+            const obj = new this.$.$money_app_god();
             return obj;
         }
         Game_page() {
@@ -10606,7 +10698,7 @@ var $;
                 skills: this.Skills_page(),
                 card: this.Card_page(),
                 caravan: this.Caravan_page(),
-                balance: this.Balance_page()
+                god: this.God_page()
             });
             return obj;
         }
@@ -10682,10 +10774,7 @@ var $;
     ], $money_app.prototype, "Caravan_page", null);
     __decorate([
         $mol_mem
-    ], $money_app.prototype, "Balance_text", null);
-    __decorate([
-        $mol_mem
-    ], $money_app.prototype, "Balance_page", null);
+    ], $money_app.prototype, "God_page", null);
     __decorate([
         $mol_mem
     ], $money_app.prototype, "Game_page", null);
@@ -10696,51 +10785,24 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $mol_text_list extends $mol_text {
-        auto_scroll() {
-            return null;
+    var $$;
+    (function ($$) {
+        class $money_app extends $.$money_app {
+            fetch_user() {
+                const result = this.$.$mol_fetch.json('user');
+            }
         }
-        attr() {
-            return {
-                ...super.attr(),
-                mol_text_list_type: this.type()
-            };
+        $$.$money_app = $money_app;
+        class $money_fetch extends $.$mol_fetch {
+            static json(uri) {
+                const BASE_URI = 'http://localhost:3000/api/v1';
+                return super.json(BASE_URI + uri);
+            }
         }
-        Paragraph(id) {
-            const obj = new this.$.$mol_text_list_item();
-            obj.index = () => this.item_index(id);
-            obj.sub = () => this.block_content(id);
-            return obj;
-        }
-        type() {
-            return "";
-        }
-    }
-    __decorate([
-        $mol_mem_key
-    ], $mol_text_list.prototype, "Paragraph", null);
-    $.$mol_text_list = $mol_text_list;
-    class $mol_text_list_item extends $mol_paragraph {
-        attr() {
-            return {
-                ...super.attr(),
-                mol_text_list_item_index: this.index()
-            };
-        }
-        index() {
-            return 0;
-        }
-    }
-    $.$mol_text_list_item = $mol_text_list_item;
+        $$.$money_fetch = $money_fetch;
+    })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
-//mol/text/list/-view.tree/list.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/text/list/list.view.css", "[mol_text_list] {\r\n\tpadding-left: 1.75rem;\r\n}\r\n\r\n[mol_text_list_item] {\r\n\tcontain: none;\r\n\tdisplay: list-item;\r\n}\r\n\r\n[mol_text_list_item]::before {\r\n\tcontent: attr( mol_text_list_item_index ) \".\";\r\n\twidth: 1.25rem;\r\n\tdisplay: inline-block;\r\n\tposition: absolute;\r\n\tmargin-left: -1.75rem;\r\n\ttext-align: end;\r\n}\r\n\r\n[mol_text_list_type=\"-\"] > [mol_text_list_item]::before,\r\n[mol_text_list_type=\"*\"] > [mol_text_list_item]::before {\r\n\tcontent: \"•\";\r\n}\r\n");
-})($ || ($ = {}));
-//mol/text/list/-css/list.view.css.ts
+//money/app/app.view.ts
 
 export default $
 //# sourceMappingURL=web.js.map

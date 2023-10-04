@@ -690,6 +690,11 @@ $mol_number $mol_view
 			enabled <= inc_enabled <= enabled
 			sub / <= inc_icon $mol_icon_plus
 
+$money_app_god $mol_page
+	title \Боги
+	body /
+		<= Balance_text $mol_text text <= balance_text? \
+
 $mol_book2 $mol_scroll
 	menu_title \
 	sub <= pages /$mol_view
@@ -898,13 +903,4 @@ $money_app $mol_view
 								<= Caravan_search $mol_button_major
 									title \Грабить караван
 						<= Caravan_result $mol_text text \Нет подходящего каравана
-				balance <= Balance_page $mol_page
-					title \Боги
-					body /
-						<= Balance_text $mol_text text \
-							\# Бог Капитал
-							\- Адептов: 80
-							\- Караванов: 80 000 руб
-							\# Бог Коммунизма
-							\- Адептов: 20
-							\- Караванов: 20 000 руб
+				god <= God_page $money_app_god

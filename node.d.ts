@@ -2916,6 +2916,21 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $money_app_god extends $mol_page {
+        title(): string;
+        body(): readonly any[];
+        balance_text(next?: any): string;
+        Balance_text(): $$.$mol_text;
+    }
+}
+
+declare namespace $.$$ {
+    class $money_app_god extends $.$money_app_god {
+        balance_text(next?: any): string;
+    }
+}
+
+declare namespace $ {
     class $mol_book2 extends $mol_scroll {
         menu_title(): string;
         sub(): readonly $mol_view[];
@@ -3142,6 +3157,22 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $mol_text_list extends $mol_text {
+        auto_scroll(): any;
+        attr(): Record<string, any>;
+        Paragraph(id: any): $mol_text_list_item;
+        type(): string;
+    }
+    class $mol_text_list_item extends $mol_paragraph {
+        attr(): Record<string, any>;
+        index(): number;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     class $money_app extends $mol_view {
         title(): string;
         sub(): readonly any[];
@@ -3168,26 +3199,18 @@ declare namespace $ {
         Caravan_form(): $$.$mol_form_draft;
         Caravan_result(): $$.$mol_text;
         Caravan_page(): $mol_page;
-        Balance_text(): $$.$mol_text;
-        Balance_page(): $mol_page;
+        God_page(): $$.$money_app_god;
         Game_page(): $$.$mol_book2_catalog;
     }
 }
 
-declare namespace $ {
-    class $mol_text_list extends $mol_text {
-        auto_scroll(): any;
-        attr(): Record<string, any>;
-        Paragraph(id: any): $mol_text_list_item;
-        type(): string;
+declare namespace $.$$ {
+    class $money_app extends $.$money_app {
+        fetch_user(): void;
     }
-    class $mol_text_list_item extends $mol_paragraph {
-        attr(): Record<string, any>;
-        index(): number;
+    class $money_fetch extends $.$mol_fetch {
+        static json(uri: string): unknown;
     }
-}
-
-declare namespace $ {
 }
 
 export = $;
