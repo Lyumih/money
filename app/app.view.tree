@@ -36,7 +36,7 @@ $money_app $mol_view
 									mask \__\__
 								<= Card_csv $mol_format
 									mask \___
-				duel <= Caravan_page $mol_page
+				caravan <= Caravan_page $mol_page
 					title \Караван
 					body /
 						<= Caravan_form $mol_form_draft
