@@ -66,13 +66,4 @@ $money_app $mol_view
 								<= Caravan_search $mol_button_major
 									title \Грабить караван
 						<= Caravan_result $mol_text text \Нет подходящего каравана
-				balance <= Balance_page $mol_page
-					title \Боги
-					body /
-						<= Balance_text $mol_text text \
-							\# Бог Капитал
-							\- Адептов: 80
-							\- Караванов: 80 000 руб
-							\# Бог Коммунизма
-							\- Адептов: 20
-							\- Караванов: 20 000 руб
+				god <= God_page $money_app_god

@@ -1,0 +1,4 @@
+$money_app_god $mol_page
+	title \Боги
+	body /
+		<= Balance_text $mol_text text <= balance_text? \
