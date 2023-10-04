@@ -15,7 +15,7 @@ $money_app $mol_view
 			menu_title \Игра
 			param \page
 			menu_tools /
-				<= GitHub $mol_link_source uri \https://github.com/Lyumih/dosha
+				<= GitHub $mol_link_source uri \https://github.com/Lyumih/money
 			spreads *
 				skills <= Skills_page $mol_page
 					title \Умения
