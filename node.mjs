@@ -10993,7 +10993,7 @@ var $;
         }
         GitHub() {
             const obj = new this.$.$mol_link_source();
-            obj.uri = () => "https://github.com/Lyumih/dosha";
+            obj.uri = () => "https://github.com/Lyumih/money";
             return obj;
         }
         Skill_description() {
