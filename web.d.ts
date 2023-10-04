@@ -2800,7 +2800,11 @@ declare namespace $ {
 
 declare namespace $.$$ {
     class $money_app_caravan extends $.$money_app_caravan {
-        caravan_grab(next?: any): any;
+        caravan_grab(next?: any): void;
+        caravan_data(next?: any): {
+            grab: boolean;
+            money: number;
+        } | undefined;
         win(next?: any): string;
     }
 }

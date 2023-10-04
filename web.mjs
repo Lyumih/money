@@ -9448,20 +9448,22 @@ var $;
     (function ($$) {
         class $money_app_caravan extends $.$money_app_caravan {
             caravan_grab(next) {
-                if (next) {
-                    return this.$.$money_fetch.json('/caravan/grab');
-                }
-                return next;
+                this.caravan_data(null);
+            }
+            caravan_data(next) {
+                if (next === undefined)
+                    return undefined;
+                return this.$.$money_fetch.json('/caravan/grab');
             }
             win(next) {
-                if (this.caravan_grab() === undefined)
+                if (this.caravan_data() === undefined)
                     return 'Самое время начать!';
-                return (this.caravan_grab().grab ? '# Вы ограбили караван на ' : '# Вас самих ограбили на ') + this.caravan_grab().money;
+                return (this.caravan_data()?.grab ? '# Вы ограбили караван на ' : '# Вас самих ограбили на ') + this.caravan_data()?.money;
             }
         }
         __decorate([
             $mol_mem
-        ], $money_app_caravan.prototype, "caravan_grab", null);
+        ], $money_app_caravan.prototype, "caravan_data", null);
         __decorate([
             $mol_mem
         ], $money_app_caravan.prototype, "win", null);
