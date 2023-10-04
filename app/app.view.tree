@@ -1,0 +1,5 @@
+$money_app $mol_view
+	title \Money Card Hero
+	sub /
+		<= Auth_page $mol_page
+
