@@ -2795,8 +2795,6 @@ declare namespace $ {
         Caravan_form(): $$.$mol_form_draft;
         win(next?: any): string;
         Win(): $$.$mol_text;
-        lose(next?: any): string;
-        Lose(): $$.$mol_text;
     }
 }
 
@@ -2804,7 +2802,6 @@ declare namespace $.$$ {
     class $money_app_caravan extends $.$money_app_caravan {
         caravan_grab(next?: any): any;
         win(next?: any): string;
-        lose(next?: any): string;
     }
 }
 

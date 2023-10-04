@@ -10003,8 +10003,7 @@ var $;
         body() {
             return [
                 this.Caravan_form(),
-                this.Win(),
-                this.Lose()
+                this.Win()
             ];
         }
         Caravan_amount() {
@@ -10043,16 +10042,6 @@ var $;
             obj.text = () => this.win();
             return obj;
         }
-        lose(next) {
-            if (next !== undefined)
-                return next;
-            return "Вас самих ограбили на 15 монет";
-        }
-        Lose() {
-            const obj = new this.$.$mol_text();
-            obj.text = () => this.lose();
-            return obj;
-        }
     }
     __decorate([
         $mol_mem
@@ -10072,12 +10061,6 @@ var $;
     __decorate([
         $mol_mem
     ], $money_app_caravan.prototype, "Win", null);
-    __decorate([
-        $mol_mem
-    ], $money_app_caravan.prototype, "lose", null);
-    __decorate([
-        $mol_mem
-    ], $money_app_caravan.prototype, "Lose", null);
     $.$money_app_caravan = $money_app_caravan;
 })($ || ($ = {}));
 //money/app/caravan/-view.tree/caravan.view.tree.ts
@@ -10089,30 +10072,23 @@ var $;
     (function ($$) {
         class $money_app_caravan extends $.$money_app_caravan {
             caravan_grab(next) {
-                console.log(next);
                 if (next) {
-                    const result = this.$.$money_fetch.json('/caravan/grab');
-                    console.log(result);
-                    return result;
+                    return this.$.$money_fetch.json('/caravan/grab');
                 }
-                return next ?? {};
+                return next;
             }
             win(next) {
-                return next ?? `Успешно ограбили караван на ` + this.caravan_grab().money;
-            }
-            lose(next) {
-                return next ?? `Вас самих ограбили на ` + this.caravan_grab().money;
+                if (this.caravan_grab() === undefined)
+                    return 'Самое время начать!';
+                return (this.caravan_grab().grab ? '# Вы ограбили караван на ' : '# Вас самих ограбили на ') + this.caravan_grab().money;
             }
         }
         __decorate([
-            $mol_action
+            $mol_mem
         ], $money_app_caravan.prototype, "caravan_grab", null);
         __decorate([
             $mol_mem
         ], $money_app_caravan.prototype, "win", null);
-        __decorate([
-            $mol_mem
-        ], $money_app_caravan.prototype, "lose", null);
         $$.$money_app_caravan = $money_app_caravan;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
