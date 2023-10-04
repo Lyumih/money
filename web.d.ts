@@ -2324,6 +2324,15 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $mol_button_major extends $mol_button_typed {
+        attr(): Record<string, any>;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_plugin extends $mol_view {
         dom_node_external(next?: Element): Element;
         attr_static(): {
@@ -2542,15 +2551,6 @@ declare namespace $.$$ {
         hover(event: PointerEvent): void;
         press(event: KeyboardEvent): void;
         row_numb(index: number): number;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    class $mol_button_major extends $mol_button_typed {
-        attr(): Record<string, any>;
     }
 }
 
@@ -3018,8 +3018,11 @@ declare namespace $ {
         money(next?: any): string;
         Money_count(): $$.$mol_text;
         GitHub(): $mol_link_source;
-        Skill_link(): $$.$mol_link_iconed;
-        Skill_registration_test(): $$.$mol_textarea;
+        Skill_new(): $mol_button_major;
+        Skill_link(): $$.$mol_link;
+        Skill_registration_url(): $$.$mol_string;
+        Skill_registration_method(): $$.$mol_string;
+        Skill_registration_body(): $$.$mol_textarea;
         Skill_save(): $mol_button_major;
         Skill_form(): $$.$mol_form_draft;
         Skill_card_registration_item(): $$.$mol_expander;

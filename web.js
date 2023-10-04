@@ -7745,6 +7745,28 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_button_major extends $mol_button_typed {
+        attr() {
+            return {
+                ...super.attr(),
+                mol_theme: "$mol_theme_accent"
+            };
+        }
+    }
+    $.$mol_button_major = $mol_button_major;
+})($ || ($ = {}));
+//mol/button/major/-view.tree/major.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major][disabled] {\n\topacity: .5;\n\tfilter: grayscale();\n}\n");
+})($ || ($ = {}));
+//mol/button/major/-css/major.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_plugin extends $mol_view {
         dom_node_external(next) {
             const host = $mol_owning_get(this).host;
@@ -8323,28 +8345,6 @@ var $;
     $mol_style_attach("mol/textarea/textarea.view.css", "[mol_textarea] {\n\tflex: 1 0 auto;\n\tflex-direction: column;\n\tvertical-align: top;\n\tmin-height: max-content;\n\twhite-space: pre-wrap;\n\tword-break: break-word;\n\tborder-radius: var(--mol_gap_round);\n\tfont-family: monospace;\n\tposition: relative;\n\ttab-size: 4;\n}\n\n[mol_textarea_view] {\n\tpointer-events: none;\n\twhite-space: inherit;\n\tfont-family: inherit;\n\ttab-size: inherit;\n}\n\n[mol_textarea_view_copy] {\n\tpointer-events: all;\n}\n\n[mol_textarea_clickable] > [mol_textarea_view] {\n\tpointer-events: all;\n}\n\n[mol_textarea_edit] {\n\tfont-family: inherit;\n\tpadding: var(--mol_gap_text);\n\tcolor: transparent !important;\n\tcaret-color: var(--mol_theme_text);\n\tresize: none;\n\ttext-align: inherit;\n\twhite-space: inherit;\n\tborder-radius: inherit;\n\toverflow-anchor: none;\n\tposition: absolute;\n\theight: 100%;\n\twidth: 100%;\n\ttab-size: inherit;\n}\n\n[mol_textarea_sidebar_showed] [mol_textarea_edit] {\n\tleft: 1.75rem;\n\twidth: calc( 100% - 1.75rem );\n}\n\n[mol_textarea_edit]:hover + [mol_textarea_view] {\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_textarea_edit]:focus + [mol_textarea_view] {\n\tz-index: var(--mol_layer_focus);\n}\n");
 })($ || ($ = {}));
 //mol/textarea/-css/textarea.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_button_major extends $mol_button_typed {
-        attr() {
-            return {
-                ...super.attr(),
-                mol_theme: "$mol_theme_accent"
-            };
-        }
-    }
-    $.$mol_button_major = $mol_button_major;
-})($ || ($ = {}));
-//mol/button/major/-view.tree/major.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major][disabled] {\n\topacity: .5;\n\tfilter: grayscale();\n}\n");
-})($ || ($ = {}));
-//mol/button/major/-css/major.view.css.ts
 ;
 "use strict";
 var $;
@@ -10432,7 +10432,7 @@ var $;
         money(next) {
             if (next !== undefined)
                 return next;
-            return "1000";
+            return "1000 монет";
         }
         Money_count() {
             const obj = new this.$.$mol_text();
@@ -10444,14 +10444,30 @@ var $;
             obj.uri = () => "https://github.com/Lyumih/money";
             return obj;
         }
+        Skill_new() {
+            const obj = new this.$.$mol_button_major();
+            obj.title = () => "Изучить новое умение";
+            return obj;
+        }
         Skill_link() {
-            const obj = new this.$.$mol_link_iconed();
+            const obj = new this.$.$mol_link();
             obj.uri = () => "https://redoc.bankingapi.ru/client-account-info/";
             obj.title = () => "Книна знаний";
             return obj;
         }
-        Skill_registration_test() {
+        Skill_registration_url() {
+            const obj = new this.$.$mol_string();
+            obj.hint = () => "url";
+            return obj;
+        }
+        Skill_registration_method() {
+            const obj = new this.$.$mol_string();
+            obj.hint = () => "Метод";
+            return obj;
+        }
+        Skill_registration_body() {
             const obj = new this.$.$mol_textarea();
+            obj.hint = () => "Данные";
             return obj;
         }
         Skill_save() {
@@ -10462,7 +10478,9 @@ var $;
         Skill_form() {
             const obj = new this.$.$mol_form_draft();
             obj.form_fields = () => [
-                this.Skill_registration_test()
+                this.Skill_registration_url(),
+                this.Skill_registration_method(),
+                this.Skill_registration_body()
             ];
             obj.buttons = () => [
                 this.Skill_save()
@@ -10482,6 +10500,7 @@ var $;
             const obj = new this.$.$mol_page();
             obj.title = () => "Умения";
             obj.body = () => [
+                this.Skill_new(),
                 this.Skill_card_registration_item()
             ];
             return obj;
@@ -10562,12 +10581,12 @@ var $;
         }
         Balance_text() {
             const obj = new this.$.$mol_text();
-            obj.text = () => "# Баланс в мире\n# Бог Капитал\n- Адептов: 80\n- Караванов: 80 000 руб\n# Бог Коммунизма\n- Адептов: 20\n- Караванов: 20 000 руб";
+            obj.text = () => "# Бог Капитал\n- Адептов: 80\n- Караванов: 80 000 руб\n# Бог Коммунизма\n- Адептов: 20\n- Караванов: 20 000 руб";
             return obj;
         }
         Balance_page() {
             const obj = new this.$.$mol_page();
-            obj.title = () => "Баланс";
+            obj.title = () => "Боги";
             obj.body = () => [
                 this.Balance_text()
             ];
@@ -10603,10 +10622,19 @@ var $;
     ], $money_app.prototype, "GitHub", null);
     __decorate([
         $mol_mem
+    ], $money_app.prototype, "Skill_new", null);
+    __decorate([
+        $mol_mem
     ], $money_app.prototype, "Skill_link", null);
     __decorate([
         $mol_mem
-    ], $money_app.prototype, "Skill_registration_test", null);
+    ], $money_app.prototype, "Skill_registration_url", null);
+    __decorate([
+        $mol_mem
+    ], $money_app.prototype, "Skill_registration_method", null);
+    __decorate([
+        $mol_mem
+    ], $money_app.prototype, "Skill_registration_body", null);
     __decorate([
         $mol_mem
     ], $money_app.prototype, "Skill_save", null);
