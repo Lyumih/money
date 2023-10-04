@@ -1,7 +1,7 @@
 $money_app $mol_view
 	title \Money Card Hero
 	sub /
-		<= Auth_page $mol_page
+		- <= Auth_page $mol_page
 			title \Войти
 			body /
 				<= Auth_form $mol_form_draft
