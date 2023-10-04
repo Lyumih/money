@@ -1,30 +1,21 @@
 namespace $.$$ {
 	export class $money_app_caravan extends $.$money_app_caravan {
 
-		@$mol_action
+		@$mol_mem
 		caravan_grab( next?: any ) {
-			console.log( next )
 			if( next ) {
-				const result = this.$.$money_fetch.json( '/caravan/grab' ) as {
+				return this.$.$money_fetch.json( '/caravan/grab' ) as {
 					grab: boolean,
 					money: number,
 				}
-				console.log( result )
-				return result
 			}
-			// this.win( result.money )
-			return next ?? {}
+			return next
 		}
 
 		@$mol_mem
-		win( next?: any ): string {
-			return next ?? `Успешно ограбили караван на ` + this.caravan_grab().money
+		win( next?: any ) {
+			if( this.caravan_grab() === undefined ) return 'Самое время начать!'
+			return ( this.caravan_grab().grab ? '# Вы ограбили караван на ' : '# Вас самих ограбили на ' ) + this.caravan_grab().money
 		}
-
-		@$mol_mem
-		lose( next?: any ): string {
-			return next ?? `Вас самих ограбили на ` + this.caravan_grab().money
-		}
-
 	}
 }

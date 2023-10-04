@@ -9,6 +9,4 @@ $money_app_caravan $mol_page
 				<= Caravan_search $mol_button_major
 					title \Грабить караван
 					click? <=> caravan_grab? null
-		- <= Caravan_result $mol_text text \Нет подходящего каравана
 		<= Win $mol_text text <= win? \Успешно ограблен караван на 45 монет
-		<= Lose $mol_text text <= lose? \Вас самих ограбили на 15 монет
