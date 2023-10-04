@@ -9010,6 +9010,235 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_icon_minus extends $mol_icon {
+        path() {
+            return "M19,13H5V11H19V13Z";
+        }
+    }
+    $.$mol_icon_minus = $mol_icon_minus;
+})($ || ($ = {}));
+//mol/icon/minus/-view.tree/minus.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_icon_plus extends $mol_icon {
+        path() {
+            return "M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z";
+        }
+    }
+    $.$mol_icon_plus = $mol_icon_plus;
+})($ || ($ = {}));
+//mol/icon/plus/-view.tree/plus.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_number extends $mol_view {
+        precision_view() {
+            return this.precision();
+        }
+        precision_change() {
+            return this.precision();
+        }
+        value_min() {
+            return -Infinity;
+        }
+        value_max() {
+            return +Infinity;
+        }
+        value(next) {
+            if (next !== undefined)
+                return next;
+            return +NaN;
+        }
+        enabled() {
+            return true;
+        }
+        sub() {
+            return [
+                this.String(),
+                this.Dec(),
+                this.Inc()
+            ];
+        }
+        precision() {
+            return 1;
+        }
+        type() {
+            return "tel";
+        }
+        value_string(next) {
+            if (next !== undefined)
+                return next;
+            return "";
+        }
+        hint() {
+            return " ";
+        }
+        string_enabled() {
+            return this.enabled();
+        }
+        submit(next) {
+            if (next !== undefined)
+                return next;
+            return null;
+        }
+        String() {
+            const obj = new this.$.$mol_string();
+            obj.type = () => this.type();
+            obj.value = (next) => this.value_string(next);
+            obj.hint = () => this.hint();
+            obj.enabled = () => this.string_enabled();
+            obj.submit = (next) => this.submit(next);
+            return obj;
+        }
+        event_dec(next) {
+            if (next !== undefined)
+                return next;
+            return null;
+        }
+        dec_enabled() {
+            return this.enabled();
+        }
+        dec_icon() {
+            const obj = new this.$.$mol_icon_minus();
+            return obj;
+        }
+        Dec() {
+            const obj = new this.$.$mol_button_minor();
+            obj.event_click = (next) => this.event_dec(next);
+            obj.enabled = () => this.dec_enabled();
+            obj.sub = () => [
+                this.dec_icon()
+            ];
+            return obj;
+        }
+        event_inc(next) {
+            if (next !== undefined)
+                return next;
+            return null;
+        }
+        inc_enabled() {
+            return this.enabled();
+        }
+        inc_icon() {
+            const obj = new this.$.$mol_icon_plus();
+            return obj;
+        }
+        Inc() {
+            const obj = new this.$.$mol_button_minor();
+            obj.event_click = (next) => this.event_inc(next);
+            obj.enabled = () => this.inc_enabled();
+            obj.sub = () => [
+                this.inc_icon()
+            ];
+            return obj;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_number.prototype, "value", null);
+    __decorate([
+        $mol_mem
+    ], $mol_number.prototype, "value_string", null);
+    __decorate([
+        $mol_mem
+    ], $mol_number.prototype, "submit", null);
+    __decorate([
+        $mol_mem
+    ], $mol_number.prototype, "String", null);
+    __decorate([
+        $mol_mem
+    ], $mol_number.prototype, "event_dec", null);
+    __decorate([
+        $mol_mem
+    ], $mol_number.prototype, "dec_icon", null);
+    __decorate([
+        $mol_mem
+    ], $mol_number.prototype, "Dec", null);
+    __decorate([
+        $mol_mem
+    ], $mol_number.prototype, "event_inc", null);
+    __decorate([
+        $mol_mem
+    ], $mol_number.prototype, "inc_icon", null);
+    __decorate([
+        $mol_mem
+    ], $mol_number.prototype, "Inc", null);
+    $.$mol_number = $mol_number;
+})($ || ($ = {}));
+//mol/number/-view.tree/number.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/number/number.css", "[mol_number] {\n\tdisplay: flex;\n\tflex: 0 1 auto;\n\tposition: relative;\n\talign-items: stretch;\n\tmax-width: 100%;\n}\n\n[mol_number_string] {\n\tappearance: textfield;\n\tflex: 1 1 7rem;\n\twidth: 7rem;\n}\n\n[mol_number_string]::-webkit-inner-spin-button {\n\tdisplay: none;\n}\n");
+})($ || ($ = {}));
+//mol/number/-css/number.css.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_number extends $.$mol_number {
+            value_limited(next) {
+                if (next === undefined)
+                    return this.value();
+                if (next === '')
+                    return this.value(Number.NaN);
+                const min = this.value_min();
+                const max = this.value_max();
+                const val = Number(next);
+                if (val < min)
+                    return this.value(min);
+                if (val > max)
+                    return this.value(max);
+                return this.value(val);
+            }
+            event_dec(next) {
+                this.value_limited((this.value_limited() || 0) - this.precision_change());
+            }
+            event_inc(next) {
+                this.value_limited((this.value_limited() || 0) + this.precision_change());
+            }
+            value_string(next) {
+                const next_num = this.value_limited(next);
+                const precisionView = this.precision_view();
+                if (next_num === 0)
+                    return '0';
+                if (!next_num)
+                    return '';
+                if (precisionView >= 1) {
+                    return (next_num / precisionView).toFixed();
+                }
+                else {
+                    const fixedNumber = Math.log10(1 / precisionView);
+                    return next_num.toFixed(Math.ceil(fixedNumber));
+                }
+            }
+            dec_enabled() {
+                return this.enabled() && (!((this.value() || 0) <= this.value_min()));
+            }
+            inc_enabled() {
+                return this.enabled() && (!((this.value() || 0) >= this.value_max()));
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_number.prototype, "dec_enabled", null);
+        __decorate([
+            $mol_mem
+        ], $mol_number.prototype, "inc_enabled", null);
+        $$.$mol_number = $mol_number;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//mol/number/number.view.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_book2 extends $mol_scroll {
         menu_title() {
             return "";
@@ -10158,21 +10387,37 @@ var $;
             ];
             return obj;
         }
-        Duel_amount() {
-            const obj = new this.$.$mol_string();
+        Caravan_amount() {
+            const obj = new this.$.$mol_number();
+            obj.hint = () => "Золотишко";
             return obj;
         }
-        Duel_search() {
+        Caravan_search() {
             const obj = new this.$.$mol_button_major();
-            obj.title = () => "Найти противника";
+            obj.title = () => "Грабить караван";
             return obj;
         }
-        Duel_page() {
+        Caravan_form() {
+            const obj = new this.$.$mol_form_draft();
+            obj.form_fields = () => [
+                this.Caravan_amount()
+            ];
+            obj.buttons = () => [
+                this.Caravan_search()
+            ];
+            return obj;
+        }
+        Caravan_result() {
+            const obj = new this.$.$mol_text();
+            obj.text = () => "Нет подходящего каравана";
+            return obj;
+        }
+        Caravan_page() {
             const obj = new this.$.$mol_page();
-            obj.title = () => "Дуэль";
+            obj.title = () => "Караван";
             obj.body = () => [
-                this.Duel_amount(),
-                this.Duel_search()
+                this.Caravan_form(),
+                this.Caravan_result()
             ];
             return obj;
         }
@@ -10183,7 +10428,7 @@ var $;
             obj.spreads = () => ({
                 skills: this.Skills_page(),
                 card: this.Card_page(),
-                duel: this.Duel_page()
+                duel: this.Caravan_page()
             });
             return obj;
         }
@@ -10232,13 +10477,19 @@ var $;
     ], $money_app.prototype, "Card_page", null);
     __decorate([
         $mol_mem
-    ], $money_app.prototype, "Duel_amount", null);
+    ], $money_app.prototype, "Caravan_amount", null);
     __decorate([
         $mol_mem
-    ], $money_app.prototype, "Duel_search", null);
+    ], $money_app.prototype, "Caravan_search", null);
     __decorate([
         $mol_mem
-    ], $money_app.prototype, "Duel_page", null);
+    ], $money_app.prototype, "Caravan_form", null);
+    __decorate([
+        $mol_mem
+    ], $money_app.prototype, "Caravan_result", null);
+    __decorate([
+        $mol_mem
+    ], $money_app.prototype, "Caravan_page", null);
     __decorate([
         $mol_mem
     ], $money_app.prototype, "Game_page", null);
