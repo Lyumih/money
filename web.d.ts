@@ -2786,6 +2786,29 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $money_app_caravan extends $mol_page {
+        title(): string;
+        body(): readonly any[];
+        Caravan_amount(): $$.$mol_number;
+        caravan_grab(next?: any): any;
+        Caravan_search(): $mol_button_major;
+        Caravan_form(): $$.$mol_form_draft;
+        win(next?: any): string;
+        Win(): $$.$mol_text;
+        lose(next?: any): string;
+        Lose(): $$.$mol_text;
+    }
+}
+
+declare namespace $.$$ {
+    class $money_app_caravan extends $.$money_app_caravan {
+        caravan_grab(next?: any): any;
+        win(next?: any): string;
+        lose(next?: any): string;
+    }
+}
+
+declare namespace $ {
     class $money_app_god extends $mol_page {
         title(): string;
         body(): readonly any[];
@@ -3064,11 +3087,7 @@ declare namespace $ {
         Card_update(): $mol_button_major;
         Card(): $$.$mol_form_draft;
         Card_page(): $mol_page;
-        Caravan_amount(): $$.$mol_number;
-        Caravan_search(): $mol_button_major;
-        Caravan_form(): $$.$mol_form_draft;
-        Caravan_result(): $$.$mol_text;
-        Caravan_page(): $mol_page;
+        Caravan_page(): $$.$money_app_caravan;
         God_page(): $$.$money_app_god;
         Game_page(): $$.$mol_book2_catalog;
     }

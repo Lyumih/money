@@ -690,6 +690,21 @@ $mol_number $mol_view
 			enabled <= inc_enabled <= enabled
 			sub / <= inc_icon $mol_icon_plus
 
+$money_app_caravan $mol_page
+	title \Караван
+	body /
+		<= Caravan_form $mol_form_draft
+			form_fields /
+				<= Caravan_amount $mol_number
+					hint \Золотишко
+			buttons /
+				<= Caravan_search $mol_button_major
+					title \Грабить караван
+					click? <=> caravan_grab? null
+		- <= Caravan_result $mol_text text \Нет подходящего каравана
+		<= Win $mol_text text <= win? \Успешно ограблен караван на 45 монет
+		<= Lose $mol_text text <= lose? \Вас самих ограбили на 15 монет
+
 $money_app_god $mol_page
 	title \Боги
 	body /
@@ -892,15 +907,5 @@ $money_app $mol_view
 							buttons /
 								<= Card_update $mol_button_major
 									title \Обновить карту
-				caravan <= Caravan_page $mol_page
-					title \Караван
-					body /
-						<= Caravan_form $mol_form_draft
-							form_fields /
-								<= Caravan_amount $mol_number
-									hint \Золотишко
-							buttons /
-								<= Caravan_search $mol_button_major
-									title \Грабить караван
-						<= Caravan_result $mol_text text \Нет подходящего каравана
+				caravan <= Caravan_page $money_app_caravan
 				god <= God_page $money_app_god

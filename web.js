@@ -9372,6 +9372,131 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $money_app_caravan extends $mol_page {
+        title() {
+            return "Караван";
+        }
+        body() {
+            return [
+                this.Caravan_form(),
+                this.Win(),
+                this.Lose()
+            ];
+        }
+        Caravan_amount() {
+            const obj = new this.$.$mol_number();
+            obj.hint = () => "Золотишко";
+            return obj;
+        }
+        caravan_grab(next) {
+            if (next !== undefined)
+                return next;
+            return null;
+        }
+        Caravan_search() {
+            const obj = new this.$.$mol_button_major();
+            obj.title = () => "Грабить караван";
+            obj.click = (next) => this.caravan_grab(next);
+            return obj;
+        }
+        Caravan_form() {
+            const obj = new this.$.$mol_form_draft();
+            obj.form_fields = () => [
+                this.Caravan_amount()
+            ];
+            obj.buttons = () => [
+                this.Caravan_search()
+            ];
+            return obj;
+        }
+        win(next) {
+            if (next !== undefined)
+                return next;
+            return "Успешно ограблен караван на 45 монет";
+        }
+        Win() {
+            const obj = new this.$.$mol_text();
+            obj.text = () => this.win();
+            return obj;
+        }
+        lose(next) {
+            if (next !== undefined)
+                return next;
+            return "Вас самих ограбили на 15 монет";
+        }
+        Lose() {
+            const obj = new this.$.$mol_text();
+            obj.text = () => this.lose();
+            return obj;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $money_app_caravan.prototype, "Caravan_amount", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_caravan.prototype, "caravan_grab", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_caravan.prototype, "Caravan_search", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_caravan.prototype, "Caravan_form", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_caravan.prototype, "win", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_caravan.prototype, "Win", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_caravan.prototype, "lose", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_caravan.prototype, "Lose", null);
+    $.$money_app_caravan = $money_app_caravan;
+})($ || ($ = {}));
+//money/app/caravan/-view.tree/caravan.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $money_app_caravan extends $.$money_app_caravan {
+            caravan_grab(next) {
+                console.log(next);
+                if (next) {
+                    const result = this.$.$money_fetch.json('/caravan/grab');
+                    console.log(result);
+                    return result;
+                }
+                return next ?? {};
+            }
+            win(next) {
+                return next ?? `Успешно ограбили караван на ` + this.caravan_grab().money;
+            }
+            lose(next) {
+                return next ?? `Вас самих ограбили на ` + this.caravan_grab().money;
+            }
+        }
+        __decorate([
+            $mol_action
+        ], $money_app_caravan.prototype, "caravan_grab", null);
+        __decorate([
+            $mol_mem
+        ], $money_app_caravan.prototype, "win", null);
+        __decorate([
+            $mol_mem
+        ], $money_app_caravan.prototype, "lose", null);
+        $$.$money_app_caravan = $money_app_caravan;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//money/app/caravan/caravan.view.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $money_app_god extends $mol_page {
         title() {
             return "Боги";
@@ -10646,38 +10771,8 @@ var $;
             ];
             return obj;
         }
-        Caravan_amount() {
-            const obj = new this.$.$mol_number();
-            obj.hint = () => "Золотишко";
-            return obj;
-        }
-        Caravan_search() {
-            const obj = new this.$.$mol_button_major();
-            obj.title = () => "Грабить караван";
-            return obj;
-        }
-        Caravan_form() {
-            const obj = new this.$.$mol_form_draft();
-            obj.form_fields = () => [
-                this.Caravan_amount()
-            ];
-            obj.buttons = () => [
-                this.Caravan_search()
-            ];
-            return obj;
-        }
-        Caravan_result() {
-            const obj = new this.$.$mol_text();
-            obj.text = () => "Нет подходящего каравана";
-            return obj;
-        }
         Caravan_page() {
-            const obj = new this.$.$mol_page();
-            obj.title = () => "Караван";
-            obj.body = () => [
-                this.Caravan_form(),
-                this.Caravan_result()
-            ];
+            const obj = new this.$.$money_app_caravan();
             return obj;
         }
         God_page() {
@@ -10757,18 +10852,6 @@ var $;
     __decorate([
         $mol_mem
     ], $money_app.prototype, "Card_page", null);
-    __decorate([
-        $mol_mem
-    ], $money_app.prototype, "Caravan_amount", null);
-    __decorate([
-        $mol_mem
-    ], $money_app.prototype, "Caravan_search", null);
-    __decorate([
-        $mol_mem
-    ], $money_app.prototype, "Caravan_form", null);
-    __decorate([
-        $mol_mem
-    ], $money_app.prototype, "Caravan_result", null);
     __decorate([
         $mol_mem
     ], $money_app.prototype, "Caravan_page", null);
