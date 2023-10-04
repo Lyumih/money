@@ -55,15 +55,5 @@ $money_app $mol_view
 							buttons /
 								<= Card_update $mol_button_major
 									title \Обновить карту
-				caravan <= Caravan_page $mol_page
-					title \Караван
-					body /
-						<= Caravan_form $mol_form_draft
-							form_fields /
-								<= Caravan_amount $mol_number
-									hint \Золотишко
-							buttons /
-								<= Caravan_search $mol_button_major
-									title \Грабить караван
-						<= Caravan_result $mol_text text \Нет подходящего каравана
+				caravan <= Caravan_page $money_app_caravan
 				god <= God_page $money_app_god
