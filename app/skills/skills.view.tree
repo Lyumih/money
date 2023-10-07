@@ -1,0 +1,32 @@
+$money_app_skills $mol_page
+	title \Умения
+	body /
+		<= Skills_level_0 $mol_text text \
+			\# Ваш уровень: 0
+			\# Уровень 1.
+		<= Skill_card_registration_item $mol_expander
+			title \Умение. Зарегистрировать карту
+			content /
+				<= Skill_link $mol_link
+					uri \https://redoc.bankingapi.ru/client-account-info/
+					title \Книна знаний
+				<= Skill_form $mol_form_draft
+					form_fields /
+						<= Skill_registration_url $mol_string
+							hint \url
+						<= Skill_registration_method $mol_string
+							hint \Метод
+						<= Skill_registration_body $mol_textarea
+							hint \Данные
+					buttons /
+						<= Skill_save $mol_button_major
+							title \Изучить новое умение
+		<= Skills_level_next $mol_text text \
+			\# Уровень 2.
+			\" Умение. Выбрать Бога (изменить тип карты)
+			\# Уровень 3.
+			\" Умение. Грабить караван (Перевод денег)
+			\# Уровень 4+.
+			\" Умение. Банк. (Взять кредит)
+			\" Умение. Стальной поезд РЖД (РЖД Апи)
+			\" Умение. Вызов авиации (Партнёры - авиакомпании)

@@ -6,31 +6,10 @@ $money_app_game $mol_book2_catalog
 	menu_foot /
 		<= GitHub $mol_link_source uri \https://github.com/Lyumih/money
 		<= Level $mol_number
-			value? <=> level? 3
+			value? <=> level? 4
 			value_min 0
 	spreads *
-		skills <= Skills_page $mol_page
-			title \Умения
-			body /
-				<= Skill_new $mol_button_major
-					title \Изучить новое умение
-				<= Skill_card_registration_item $mol_expander
-					title \Зарегистрировать карту
-					content /
-						<= Skill_link $mol_link
-							uri \https://redoc.bankingapi.ru/client-account-info/
-							title \Книна знаний
-						<= Skill_form $mol_form_draft
-							form_fields /
-								<= Skill_registration_url $mol_string
-									hint \url
-								<= Skill_registration_method $mol_string
-									hint \Метод
-								<= Skill_registration_body $mol_textarea
-									hint \Данные
-							buttons /
-								<= Skill_save $mol_button_major
-									title \Изучить
+		skills <= Skills_page $money_app_skills
 		card <= Card_page $mol_page
 			title \Адепт
 			body /
