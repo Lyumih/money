@@ -1,0 +1,49 @@
+$money_app_game $mol_book2_catalog
+	menu_title \Money Card Hero
+	param \page
+	menu_tools /
+		<= Money_count $mol_text text? <= money? \1000 💵
+	menu_foot /
+		<= GitHub $mol_link_source uri \https://github.com/Lyumih/money
+		<= Level $mol_number
+			value? <=> level? 3
+			value_min 0
+	spreads *
+		skills <= Skills_page $mol_page
+			title \Умения
+			body /
+				<= Skill_new $mol_button_major
+					title \Изучить новое умение
+				<= Skill_card_registration_item $mol_expander
+					title \Зарегистрировать карту
+					content /
+						<= Skill_link $mol_link
+							uri \https://redoc.bankingapi.ru/client-account-info/
+							title \Книна знаний
+						<= Skill_form $mol_form_draft
+							form_fields /
+								<= Skill_registration_url $mol_string
+									hint \url
+								<= Skill_registration_method $mol_string
+									hint \Метод
+								<= Skill_registration_body $mol_textarea
+									hint \Данные
+							buttons /
+								<= Skill_save $mol_button_major
+									title \Изучить
+		card <= Card_page $mol_page
+			title \Адепт
+			body /
+				<= Card $mol_form_draft
+					form_fields /
+						<= Card_code $mol_format
+							mask \____ ____ ____ ____
+						<= Card_date $mol_format
+							mask \__\__
+						<= Card_csv $mol_format
+							mask \___
+					buttons /
+						<= Card_update $mol_button_major
+							title \Обновить карту
+		caravan <= Caravan_page $money_app_caravan
+		god <= God_page $money_app_god

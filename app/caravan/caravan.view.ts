@@ -18,5 +18,6 @@ namespace $.$$ {
 			if( this.caravan_data() === undefined ) return 'Самое время начать!'
 			return ( this.caravan_data()?.grab ? '# Вы ограбили караван на ' : '# Вас самих ограбили на ' ) + this.caravan_data()?.money
 		}
+
 	}
 }
