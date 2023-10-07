@@ -10153,28 +10153,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $mol_button_major extends $mol_button_typed {
-        attr() {
-            return {
-                ...super.attr(),
-                mol_theme: "$mol_theme_accent"
-            };
-        }
-    }
-    $.$mol_button_major = $mol_button_major;
-})($ || ($ = {}));
-//mol/button/major/-view.tree/major.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major][disabled] {\n\topacity: .5;\n\tfilter: grayscale();\n}\n");
-})($ || ($ = {}));
-//mol/button/major/-css/major.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
     class $mol_textarea extends $mol_stack {
         attr() {
             return {
@@ -10447,6 +10425,28 @@ var $;
     $mol_style_attach("mol/textarea/textarea.view.css", "[mol_textarea] {\n\tflex: 1 0 auto;\n\tflex-direction: column;\n\tvertical-align: top;\n\tmin-height: max-content;\n\twhite-space: pre-wrap;\n\tword-break: break-word;\n\tborder-radius: var(--mol_gap_round);\n\tfont-family: monospace;\n\tposition: relative;\n\ttab-size: 4;\n}\n\n[mol_textarea_view] {\n\tpointer-events: none;\n\twhite-space: inherit;\n\tfont-family: inherit;\n\ttab-size: inherit;\n}\n\n[mol_textarea_view_copy] {\n\tpointer-events: all;\n}\n\n[mol_textarea_clickable] > [mol_textarea_view] {\n\tpointer-events: all;\n}\n\n[mol_textarea_edit] {\n\tfont-family: inherit;\n\tpadding: var(--mol_gap_text);\n\tcolor: transparent !important;\n\tcaret-color: var(--mol_theme_text);\n\tresize: none;\n\ttext-align: inherit;\n\twhite-space: inherit;\n\tborder-radius: inherit;\n\toverflow-anchor: none;\n\tposition: absolute;\n\theight: 100%;\n\twidth: 100%;\n\ttab-size: inherit;\n}\n\n[mol_textarea_sidebar_showed] [mol_textarea_edit] {\n\tleft: 1.75rem;\n\twidth: calc( 100% - 1.75rem );\n}\n\n[mol_textarea_edit]:hover + [mol_textarea_view] {\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_textarea_edit]:focus + [mol_textarea_view] {\n\tz-index: var(--mol_layer_focus);\n}\n");
 })($ || ($ = {}));
 //mol/textarea/-css/textarea.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_button_major extends $mol_button_typed {
+        attr() {
+            return {
+                ...super.attr(),
+                mol_theme: "$mol_theme_accent"
+            };
+        }
+    }
+    $.$mol_button_major = $mol_button_major;
+})($ || ($ = {}));
+//mol/button/major/-view.tree/major.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major][disabled] {\n\topacity: .5;\n\tfilter: grayscale();\n}\n");
+})($ || ($ = {}));
+//mol/button/major/-css/major.view.css.ts
 ;
 "use strict";
 var $;
@@ -11014,6 +11014,109 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $money_app_skills extends $mol_page {
+        title() {
+            return "Умения";
+        }
+        body() {
+            return [
+                this.Skills_level_0(),
+                this.Skill_card_registration_item(),
+                this.Skills_level_next()
+            ];
+        }
+        Skills_level_0() {
+            const obj = new this.$.$mol_text();
+            obj.text = () => "# Ваш уровень: 0\n# Уровень 1.";
+            return obj;
+        }
+        Skill_link() {
+            const obj = new this.$.$mol_link();
+            obj.uri = () => "https://redoc.bankingapi.ru/client-account-info/";
+            obj.title = () => "Книна знаний";
+            return obj;
+        }
+        Skill_registration_url() {
+            const obj = new this.$.$mol_string();
+            obj.hint = () => "url";
+            return obj;
+        }
+        Skill_registration_method() {
+            const obj = new this.$.$mol_string();
+            obj.hint = () => "Метод";
+            return obj;
+        }
+        Skill_registration_body() {
+            const obj = new this.$.$mol_textarea();
+            obj.hint = () => "Данные";
+            return obj;
+        }
+        Skill_save() {
+            const obj = new this.$.$mol_button_major();
+            obj.title = () => "Изучить новое умение";
+            return obj;
+        }
+        Skill_form() {
+            const obj = new this.$.$mol_form_draft();
+            obj.form_fields = () => [
+                this.Skill_registration_url(),
+                this.Skill_registration_method(),
+                this.Skill_registration_body()
+            ];
+            obj.buttons = () => [
+                this.Skill_save()
+            ];
+            return obj;
+        }
+        Skill_card_registration_item() {
+            const obj = new this.$.$mol_expander();
+            obj.title = () => "Умение. Зарегистрировать карту";
+            obj.content = () => [
+                this.Skill_link(),
+                this.Skill_form()
+            ];
+            return obj;
+        }
+        Skills_level_next() {
+            const obj = new this.$.$mol_text();
+            obj.text = () => "# Уровень 2.\n\" Умение. Выбрать Бога (изменить тип карты)\n# Уровень 3.\n\" Умение. Грабить караван (Перевод денег)\n# Уровень 4+.\n\" Умение. Банк. (Взять кредит)\n\" Умение. Стальной поезд РЖД (РЖД Апи)\n\" Умение. Вызов авиации (Партнёры - авиакомпании)";
+            return obj;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $money_app_skills.prototype, "Skills_level_0", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_skills.prototype, "Skill_link", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_skills.prototype, "Skill_registration_url", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_skills.prototype, "Skill_registration_method", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_skills.prototype, "Skill_registration_body", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_skills.prototype, "Skill_save", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_skills.prototype, "Skill_form", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_skills.prototype, "Skill_card_registration_item", null);
+    __decorate([
+        $mol_mem
+    ], $money_app_skills.prototype, "Skills_level_next", null);
+    $.$money_app_skills = $money_app_skills;
+})($ || ($ = {}));
+//money/app/skills/-view.tree/skills.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_format extends $mol_string {
         allow() {
             return "0123456789";
@@ -11206,7 +11309,7 @@ var $;
 (function ($) {
     class $money_app_god extends $mol_page {
         title() {
-            return "Боги";
+            return "Бог";
         }
         body() {
             return [
@@ -11349,7 +11452,7 @@ var $;
         level(next) {
             if (next !== undefined)
                 return next;
-            return 3;
+            return 4;
         }
         Level() {
             const obj = new this.$.$mol_number();
@@ -11357,65 +11460,8 @@ var $;
             obj.value_min = () => 0;
             return obj;
         }
-        Skill_new() {
-            const obj = new this.$.$mol_button_major();
-            obj.title = () => "Изучить новое умение";
-            return obj;
-        }
-        Skill_link() {
-            const obj = new this.$.$mol_link();
-            obj.uri = () => "https://redoc.bankingapi.ru/client-account-info/";
-            obj.title = () => "Книна знаний";
-            return obj;
-        }
-        Skill_registration_url() {
-            const obj = new this.$.$mol_string();
-            obj.hint = () => "url";
-            return obj;
-        }
-        Skill_registration_method() {
-            const obj = new this.$.$mol_string();
-            obj.hint = () => "Метод";
-            return obj;
-        }
-        Skill_registration_body() {
-            const obj = new this.$.$mol_textarea();
-            obj.hint = () => "Данные";
-            return obj;
-        }
-        Skill_save() {
-            const obj = new this.$.$mol_button_major();
-            obj.title = () => "Изучить";
-            return obj;
-        }
-        Skill_form() {
-            const obj = new this.$.$mol_form_draft();
-            obj.form_fields = () => [
-                this.Skill_registration_url(),
-                this.Skill_registration_method(),
-                this.Skill_registration_body()
-            ];
-            obj.buttons = () => [
-                this.Skill_save()
-            ];
-            return obj;
-        }
-        Skill_card_registration_item() {
-            const obj = new this.$.$mol_expander();
-            obj.title = () => "Зарегистрировать карту";
-            obj.content = () => [
-                this.Skill_link(),
-                this.Skill_form()
-            ];
-            return obj;
-        }
         Skills_page() {
-            const obj = new this.$.$mol_page();
-            obj.title = () => "Умения";
-            obj.body = () => [
-                this.Skill_new(),
-                this.Skill_card_registration_item()
-            ];
+            const obj = new this.$.$money_app_skills();
             return obj;
         }
         Card_code() {
@@ -11484,30 +11530,6 @@ var $;
     ], $money_app_game.prototype, "Level", null);
     __decorate([
         $mol_mem
-    ], $money_app_game.prototype, "Skill_new", null);
-    __decorate([
-        $mol_mem
-    ], $money_app_game.prototype, "Skill_link", null);
-    __decorate([
-        $mol_mem
-    ], $money_app_game.prototype, "Skill_registration_url", null);
-    __decorate([
-        $mol_mem
-    ], $money_app_game.prototype, "Skill_registration_method", null);
-    __decorate([
-        $mol_mem
-    ], $money_app_game.prototype, "Skill_registration_body", null);
-    __decorate([
-        $mol_mem
-    ], $money_app_game.prototype, "Skill_save", null);
-    __decorate([
-        $mol_mem
-    ], $money_app_game.prototype, "Skill_form", null);
-    __decorate([
-        $mol_mem
-    ], $money_app_game.prototype, "Skill_card_registration_item", null);
-    __decorate([
-        $mol_mem
     ], $money_app_game.prototype, "Skills_page", null);
     __decorate([
         $mol_mem
@@ -11545,12 +11567,12 @@ var $;
         class $money_app_game extends $.$money_app_game {
             menu_links() {
                 const links = [this.Menu_link('skills')];
-                if (this.level() >= 2)
+                if (this.level() >= 1)
                     links.push(this.Menu_link('card'));
+                if (this.level() >= 2)
+                    links.push(this.Menu_link('god'));
                 if (this.level() >= 3)
                     links.push(this.Menu_link('caravan'));
-                if (this.level() >= 4)
-                    links.push(this.Menu_link('god'));
                 return links;
             }
         }

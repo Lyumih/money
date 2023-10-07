@@ -2936,15 +2936,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $mol_button_major extends $mol_button_typed {
-        attr(): Record<string, any>;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
     class $mol_textarea extends $mol_stack {
         attr(): Record<string, any>;
         event(): Record<string, any>;
@@ -2984,6 +2975,15 @@ declare namespace $.$$ {
         hover(event: PointerEvent): void;
         press(event: KeyboardEvent): void;
         row_numb(index: number): number;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_button_major extends $mol_button_typed {
+        attr(): Record<string, any>;
     }
 }
 
@@ -3131,6 +3131,22 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $money_app_skills extends $mol_page {
+        title(): string;
+        body(): readonly any[];
+        Skills_level_0(): $$.$mol_text;
+        Skill_link(): $$.$mol_link;
+        Skill_registration_url(): $$.$mol_string;
+        Skill_registration_method(): $$.$mol_string;
+        Skill_registration_body(): $$.$mol_textarea;
+        Skill_save(): $mol_button_major;
+        Skill_form(): $$.$mol_form_draft;
+        Skill_card_registration_item(): $$.$mol_expander;
+        Skills_level_next(): $$.$mol_text;
+    }
+}
+
+declare namespace $ {
     class $mol_format extends $mol_string {
         allow(): string;
         hint(): string;
@@ -3216,15 +3232,7 @@ declare namespace $ {
         GitHub(): $mol_link_source;
         level(next?: any): number;
         Level(): $$.$mol_number;
-        Skill_new(): $mol_button_major;
-        Skill_link(): $$.$mol_link;
-        Skill_registration_url(): $$.$mol_string;
-        Skill_registration_method(): $$.$mol_string;
-        Skill_registration_body(): $$.$mol_textarea;
-        Skill_save(): $mol_button_major;
-        Skill_form(): $$.$mol_form_draft;
-        Skill_card_registration_item(): $$.$mol_expander;
-        Skills_page(): $mol_page;
+        Skills_page(): $money_app_skills;
         Card_code(): $$.$mol_format;
         Card_date(): $$.$mol_format;
         Card_csv(): $$.$mol_format;

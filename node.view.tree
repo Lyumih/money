@@ -686,11 +686,6 @@ $mol_number $mol_view
 			enabled <= inc_enabled <= enabled
 			sub / <= inc_icon $mol_icon_plus
 
-$mol_button_major $mol_button_typed
-	attr *
-		^
-		mol_theme \$mol_theme_accent
-
 $mol_textarea $mol_stack
 	attr *
 		^
@@ -762,6 +757,11 @@ $mol_textarea_edit $mol_string
 		^
 		scrollTop 0
 
+$mol_button_major $mol_button_typed
+	attr *
+		^
+		mol_theme \$mol_theme_accent
+
 $mol_labeler $mol_list
 	rows /
 		<= Label $mol_view
@@ -820,6 +820,39 @@ $mol_expander $mol_list
 		<= Content $mol_list
 			rows <= content /
 
+$money_app_skills $mol_page
+	title \Умения
+	body /
+		<= Skills_level_0 $mol_text text \
+			\# Ваш уровень: 0
+			\# Уровень 1.
+		<= Skill_card_registration_item $mol_expander
+			title \Умение. Зарегистрировать карту
+			content /
+				<= Skill_link $mol_link
+					uri \https://redoc.bankingapi.ru/client-account-info/
+					title \Книна знаний
+				<= Skill_form $mol_form_draft
+					form_fields /
+						<= Skill_registration_url $mol_string
+							hint \url
+						<= Skill_registration_method $mol_string
+							hint \Метод
+						<= Skill_registration_body $mol_textarea
+							hint \Данные
+					buttons /
+						<= Skill_save $mol_button_major
+							title \Изучить новое умение
+		<= Skills_level_next $mol_text text \
+			\# Уровень 2.
+			\" Умение. Выбрать Бога (изменить тип карты)
+			\# Уровень 3.
+			\" Умение. Грабить караван (Перевод денег)
+			\# Уровень 4+.
+			\" Умение. Банк. (Взять кредит)
+			\" Умение. Стальной поезд РЖД (РЖД Апи)
+			\" Умение. Вызов авиации (Партнёры - авиакомпании)
+
 $mol_format $mol_string
 	allow \0123456789
 	hint <= mask*0 \
@@ -839,7 +872,7 @@ $money_app_caravan $mol_page
 		<= Win $mol_text text <= win? \Успешно ограблен караван на 45 монет
 
 $money_app_god $mol_page
-	title \Боги
+	title \Бог
 	body /
 		<= Balance_text $mol_text text <= balance_text? \
 
@@ -865,31 +898,10 @@ $money_app_game $mol_book2_catalog
 	menu_foot /
 		<= GitHub $mol_link_source uri \https://github.com/Lyumih/money
 		<= Level $mol_number
-			value? <=> level? 3
+			value? <=> level? 4
 			value_min 0
 	spreads *
-		skills <= Skills_page $mol_page
-			title \Умения
-			body /
-				<= Skill_new $mol_button_major
-					title \Изучить новое умение
-				<= Skill_card_registration_item $mol_expander
-					title \Зарегистрировать карту
-					content /
-						<= Skill_link $mol_link
-							uri \https://redoc.bankingapi.ru/client-account-info/
-							title \Книна знаний
-						<= Skill_form $mol_form_draft
-							form_fields /
-								<= Skill_registration_url $mol_string
-									hint \url
-								<= Skill_registration_method $mol_string
-									hint \Метод
-								<= Skill_registration_body $mol_textarea
-									hint \Данные
-							buttons /
-								<= Skill_save $mol_button_major
-									title \Изучить
+		skills <= Skills_page $money_app_skills
 		card <= Card_page $mol_page
 			title \Адепт
 			body /
