@@ -145,12 +145,6 @@
     "$mol_charset_encoding",
     "$mol_charset_encode",
     "$mol_compare_array",
-    "$hyoo_lingua_translate",
-    "$hyoo_lingua",
-    "$hyoo",
-    "$mol_huggingface",
-    "$mol_fetch",
-    "$mol_dom_parse",
     "$mol_string",
     "$mol_icon_cross",
     "$mol_icon",
@@ -221,7 +215,9 @@
     "$mol_expander",
     "$mol_format",
     "$money_app_caravan",
-    "$money_app_god"
+    "$money_app_god",
+    "$mol_fetch",
+    "$mol_dom_parse"
   ],
   "dependencies": {
     "jsdom": "*",
