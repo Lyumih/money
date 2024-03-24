@@ -775,10 +775,7 @@ $mol_textarea_edit $mol_string
 		^
 		scrollTop 0
 
-$mol_button_major $mol_button_typed
-	attr *
-		^
-		mol_theme \$mol_theme_accent
+$mol_button_major $mol_button_minor
 
 $mol_row $mol_view
 
