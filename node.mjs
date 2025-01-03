@@ -8676,7 +8676,7 @@ var $;
 			return "async";
 		}
 		cors(){
-			return "anonymous";
+			return null;
 		}
 		natural_width(){
 			return 0;
