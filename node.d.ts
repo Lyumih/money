@@ -428,7 +428,7 @@ declare namespace $ {
         static getter<Host, Args extends readonly unknown[], Result>(task: (this: Host, ...args: Args) => Result): (host: Host, args: Args) => $mol_wire_task<Host, Args, Result>;
         get temp(): boolean;
         complete(): void;
-        put(next: Result | Error | Promise<Result | Error>): Result | Error | Promise<Result | Error>;
+        put(next: Result | Error | Promise<Result | Error>): Error | Result | Promise<Error | Result>;
     }
 }
 
@@ -1343,7 +1343,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    type $mol_style_pseudo_class = ':active' | ':any' | ':any-link' | ':checked' | ':default' | ':defined' | ':dir(rtl)' | ':dir(ltr)' | ':disabled' | ':empty' | ':enabled' | ':first' | ':first-child' | ':first-of-type' | ':fullscreen' | ':focus' | ':focus-visible' | ':focus-within' | ':hover' | ':indeterminate' | ':in-range' | ':invalid' | ':last-child' | ':last-of-type' | ':left' | ':link' | ':not()' | ':nth-child(even)' | ':nth-child(odd)' | ':nth-last-child(even)' | ':nth-last-child(odd)' | ':nth-of-type(even)' | ':nth-of-type(odd)' | ':nth-last-of-type(even)' | ':nth-last-of-type(odd)' | ':only-child' | ':only-of-type' | ':optional' | ':out-of-range' | ':placeholder-shown' | ':read-only' | ':read-write' | ':required' | ':right' | ':root' | ':scope' | ':target' | ':valid' | ':visited';
+    type $mol_style_pseudo_class = ':active' | ':any' | ':any-link' | ':checked' | ':default' | ':defined' | ':dir(rtl)' | ':dir(ltr)' | ':disabled' | ':empty' | ':enabled' | ':first' | ':first-child' | ':first-of-type' | ':fullscreen' | ':focus' | ':focus-visible' | ':focus-within' | ':hover' | ':indeterminate' | ':in-range' | ':invalid' | ':last-child' | ':last-of-type' | ':left' | ':link' | `:not(${string})` | `:nth-child(${string})` | `:nth-last-child(${string})` | `:nth-of-type(${string})` | `:nth-last-of-type(${string})` | ':only-child' | ':only-of-type' | ':optional' | ':out-of-range' | ':placeholder-shown' | ':read-only' | ':read-write' | ':required' | ':right' | ':root' | ':scope' | ':target' | ':valid' | ':visited';
 }
 
 declare namespace $ {
@@ -4623,6 +4623,37 @@ declare namespace $ {
 }
 
 declare namespace $ {
+
+	export class $mol_icon_restore extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=restore.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_status extends $mol_view {
+		message( ): string
+		status( ): ReturnType< $mol_status['title'] >
+		minimal_height( ): number
+		minimal_width( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=status.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_status extends $.$mol_status {
+        message(): any;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     function $mol_wire_race<Tasks extends ((...args: any) => any)[]>(...tasks: Tasks): {
         [index in keyof Tasks]: ReturnType<Tasks[index]>;
     };
@@ -4630,9 +4661,54 @@ declare namespace $ {
 
 declare namespace $ {
 
+	type $mol_button_major__title_mol_form_draft_1 = $mol_type_enforce<
+		ReturnType< $mol_form_draft['submit_title'] >
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__hint_mol_form_draft_2 = $mol_type_enforce<
+		ReturnType< $mol_form_draft['submit_hint'] >
+		,
+		ReturnType< $mol_button_major['hint'] >
+	>
+	type $mol_button_major__click_mol_form_draft_3 = $mol_type_enforce<
+		ReturnType< $mol_form_draft['submit'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_button_minor__hint_mol_form_draft_4 = $mol_type_enforce<
+		ReturnType< $mol_form_draft['reset_title'] >
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__sub_mol_form_draft_5 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_button_minor__click_mol_form_draft_6 = $mol_type_enforce<
+		ReturnType< $mol_form_draft['reset'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_status__message_mol_form_draft_7 = $mol_type_enforce<
+		ReturnType< $mol_form_draft['result'] >
+		,
+		ReturnType< $mol_status['message'] >
+	>
 	export class $mol_form_draft extends $mol_form {
+		submit_title( ): string
+		submit_hint( ): string
+		Submit( ): $mol_button_major
+		reset_title( ): string
+		Reset_icon( ): $mol_icon_restore
+		Reset( ): $mol_button_minor
+		result( next?: string ): string
+		Result( ): $mol_status
 		model( ): $mol_object2
 		changed( ): boolean
+		state( ): Record<string, any>
+		value( id: any, next?: any ): any
 		value_str( id: any, next?: string ): string
 		value_bool( id: any, next?: boolean ): boolean
 		value_number( id: any, next?: number ): number
@@ -4640,6 +4716,9 @@ declare namespace $ {
 		list_string( id: any, next?: readonly(string)[] ): readonly(string)[]
 		value_changed( id: any): boolean
 		reset( next?: any ): any
+		message_done( ): string
+		message_invalid( ): string
+		buttons( ): readonly($mol_view)[]
 	}
 	
 }
@@ -4660,14 +4739,15 @@ declare namespace $.$$ {
         value_changed(field: string): boolean;
         state(next?: Record<string, Value | null> | null): Record<string, Value | null>;
         changed(): boolean;
-        submit_allowed(): boolean;
         reset(next?: unknown): void;
-        submit(next?: Event): void;
+        result(next?: string | Error): string;
+        buttons(): ($mol_button_minor | $.$mol_status)[];
+        submit(next?: Event): boolean;
     }
     export {};
 }
 
-declare namespace $ {
+declare namespace $.$$ {
 }
 
 declare namespace $ {

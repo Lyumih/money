@@ -4213,7 +4213,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/view/view/view.css", "[mol_view] {\n\ttransition-property: height, width, min-height, min-width, max-width, max-height, transform;\n\ttransition-duration: .2s;\n\ttransition-timing-function: ease-out;\n\t-webkit-appearance: none;\n\tbox-sizing: border-box;\n\tdisplay: flex;\n\tflex-shrink: 0;\n\tcontain: style;\n\tscrollbar-color: var(--mol_theme_line) transparent;\n\tscrollbar-width: thin;\n}\t\n\n[mol_view]::selection {\n\tbackground: var(--mol_theme_line);\n}\t\n\n[mol_view]::-webkit-scrollbar {\n\twidth: .25rem;\n\theight: .25rem;\n}\n\n[mol_view]::-webkit-scrollbar-corner {\n\tbackground-color: var(--mol_theme_line);\n}\n\n[mol_view]::-webkit-scrollbar-track {\n\tbackground-color: transparent;\n}\n\n[mol_view]::-webkit-scrollbar-thumb {\n\tbackground-color: var(--mol_theme_line);\n\tborder-radius: var(--mol_gap_round);\n}\n\n[mol_view] > * {\n\tword-break: inherit;\n}\n\n[mol_view_root] {\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 100%;\n\theight: 100%;\n\tbox-sizing: border-box;\n\tfont-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n\tfont-size: 1rem;\n\tline-height: 1.5rem;\n\t/* background: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text); */\n\tcontain: unset; /** Fixes bg ignoring when applied to body on Chrome */\n\ttab-size: 4;\n\toverscroll-behavior: contain; /** Disable navigation gestures **/\n}\n\n@media print {\n\t[mol_view_root] {\n\t\theight: auto;\n\t}\n}\n[mol_view][mol_view_error]:not([mol_view_error=\"Promise\"], [mol_view_error=\"$mol_promise_blocker\"]) {\n\tbackground-image: repeating-linear-gradient(\n\t\t-45deg,\n\t\t#f92323,\n\t\t#f92323 .5rem,\n\t\t#ff3d3d .5rem,\n\t\t#ff3d3d 1.5rem\n\t);\n\tcolor: black;\n\talign-items: center;\n\tjustify-content: center;\n}\n\n@keyframes mol_view_wait {\n\tfrom {\n\t\topacity: .25;\n\t}\n\t20% {\n\t\topacity: .75;\n\t}\n\tto {\n\t\topacity: .25;\n\t}\n}\n\n:where([mol_view][mol_view_error=\"$mol_promise_blocker\"]),\n:where([mol_view][mol_view_error=\"Promise\"]) {\n\tbackground: var(--mol_theme_hover);\n}\n\n[mol_view][mol_view_error=\"Promise\"] {\n\tanimation: mol_view_wait 1s steps(20,end) infinite;\n}\n");
+    $mol_style_attach("mol/view/view/view.css", "[mol_view] {\n\ttransition-property: height, width, min-height, min-width, max-width, max-height, transform, scale, translate, rotate;\n\ttransition-duration: .2s;\n\ttransition-timing-function: ease-out;\n\t-webkit-appearance: none;\n\tbox-sizing: border-box;\n\tdisplay: flex;\n\tflex-shrink: 0;\n\tcontain: style;\n\tscrollbar-color: var(--mol_theme_line) transparent;\n\tscrollbar-width: thin;\n}\t\n\n[mol_view]::selection {\n\tbackground: var(--mol_theme_line);\n}\t\n\n[mol_view]::-webkit-scrollbar {\n\twidth: .25rem;\n\theight: .25rem;\n}\n\n[mol_view]::-webkit-scrollbar-corner {\n\tbackground-color: var(--mol_theme_line);\n}\n\n[mol_view]::-webkit-scrollbar-track {\n\tbackground-color: transparent;\n}\n\n[mol_view]::-webkit-scrollbar-thumb {\n\tbackground-color: var(--mol_theme_line);\n\tborder-radius: var(--mol_gap_round);\n}\n\n[mol_view] > * {\n\tword-break: inherit;\n}\n\n[mol_view_root] {\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 100%;\n\theight: 100%;\n\tbox-sizing: border-box;\n\tfont-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n\tfont-size: 1rem;\n\tline-height: 1.5rem;\n\t/* background: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text); */\n\tcontain: unset; /** Fixes bg ignoring when applied to body on Chrome */\n\ttab-size: 4;\n\toverscroll-behavior: contain; /** Disable navigation gestures **/\n}\n\n@media print {\n\t[mol_view_root] {\n\t\theight: auto;\n\t}\n}\n[mol_view][mol_view_error]:not([mol_view_error=\"Promise\"], [mol_view_error=\"$mol_promise_blocker\"]) {\n\tbackground-image: repeating-linear-gradient(\n\t\t-45deg,\n\t\t#f92323,\n\t\t#f92323 .5rem,\n\t\t#ff3d3d .5rem,\n\t\t#ff3d3d 1.5rem\n\t);\n\tcolor: black;\n\talign-items: center;\n\tjustify-content: center;\n}\n\n@keyframes mol_view_wait {\n\tfrom {\n\t\topacity: .25;\n\t}\n\t20% {\n\t\topacity: .75;\n\t}\n\tto {\n\t\topacity: .25;\n\t}\n}\n\n:where([mol_view][mol_view_error=\"$mol_promise_blocker\"]),\n:where([mol_view][mol_view_error=\"Promise\"]) {\n\tbackground: var(--mol_theme_hover);\n}\n\n[mol_view][mol_view_error=\"Promise\"] {\n\tanimation: mol_view_wait 1s steps(20,end) infinite;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -11444,13 +11444,120 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_icon_restore) = class $mol_icon_restore extends ($.$mol_icon) {
+		path(){
+			return "M13,3A9,9 0 0,0 4,12H1L4.89,15.89L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_status) = class $mol_status extends ($.$mol_view) {
+		message(){
+			return "";
+		}
+		status(){
+			return (this.title());
+		}
+		minimal_height(){
+			return 24;
+		}
+		minimal_width(){
+			return 0;
+		}
+		sub(){
+			return [(this.message())];
+		}
+	};
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_status extends $.$mol_status {
+            message() {
+                try {
+                    return this.status() ?? null;
+                }
+                catch (error) {
+                    if (error instanceof Promise)
+                        $mol_fail_hidden(error);
+                    $mol_fail_log(error);
+                    return error.message;
+                }
+            }
+        }
+        $$.$mol_status = $mol_status;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/status/status.view.css", "[mol_status] {\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tdisplay: block;\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]) {\n\tcolor: var(--mol_theme_focus);\n}\n\n[mol_status]:not([mol_view_error=\"Promise\"]):empty {\n\tdisplay: none;\n}\n");
+})($ || ($ = {}));
+
+;
 	($.$mol_form_draft) = class $mol_form_draft extends ($.$mol_form) {
+		submit_title(){
+			return (this.$.$mol_locale.text("$mol_form_draft_submit_title"));
+		}
+		submit_hint(){
+			return "";
+		}
+		Submit(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.submit_title()));
+			(obj.hint) = () => ((this.submit_hint()));
+			(obj.click) = (next) => ((this.submit(next)));
+			return obj;
+		}
+		reset_title(){
+			return (this.$.$mol_locale.text("$mol_form_draft_reset_title"));
+		}
+		Reset_icon(){
+			const obj = new this.$.$mol_icon_restore();
+			return obj;
+		}
+		Reset(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.hint) = () => ((this.reset_title()));
+			(obj.sub) = () => ([(this.Reset_icon())]);
+			(obj.click) = (next) => ((this.reset(next)));
+			return obj;
+		}
+		result(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Result(){
+			const obj = new this.$.$mol_status();
+			(obj.message) = () => ((this.result()));
+			return obj;
+		}
 		model(){
 			const obj = new this.$.$mol_object2();
 			return obj;
 		}
 		changed(){
 			return false;
+		}
+		state(){
+			return {};
+		}
+		value(id, next){
+			if(next !== undefined) return next;
+			return null;
 		}
 		value_str(id, next){
 			if(next !== undefined) return next;
@@ -11479,8 +11586,27 @@ var $;
 			if(next !== undefined) return next;
 			return null;
 		}
+		message_done(){
+			return (this.$.$mol_locale.text("$mol_form_draft_message_done"));
+		}
+		message_invalid(){
+			return (this.$.$mol_locale.text("$mol_form_draft_message_invalid"));
+		}
+		buttons(){
+			return [
+				(this.Submit()), 
+				(this.Reset()), 
+				(this.Result())
+			];
+		}
 	};
+	($mol_mem(($.$mol_form_draft.prototype), "Submit"));
+	($mol_mem(($.$mol_form_draft.prototype), "Reset_icon"));
+	($mol_mem(($.$mol_form_draft.prototype), "Reset"));
+	($mol_mem(($.$mol_form_draft.prototype), "result"));
+	($mol_mem(($.$mol_form_draft.prototype), "Result"));
 	($mol_mem(($.$mol_form_draft.prototype), "model"));
+	($mol_mem_key(($.$mol_form_draft.prototype), "value"));
 	($mol_mem_key(($.$mol_form_draft.prototype), "value_str"));
 	($mol_mem_key(($.$mol_form_draft.prototype), "value_bool"));
 	($mol_mem_key(($.$mol_form_draft.prototype), "value_number"));
@@ -11576,22 +11702,39 @@ var $;
                 return this.state_pick(field, next) ?? this.model_pick(field);
             }
             value_changed(field) {
-                const next = this.state_pick(field);
-                const prev = this.model_pick(field);
-                const next_norm = normalize_val(prev, next);
-                return !$mol_compare_deep(next_norm, prev);
+                const prev = $mol_wire_probe(() => this.value_changed(field));
+                try {
+                    const next = this.state_pick(field);
+                    const prev = this.model_pick(field);
+                    const next_norm = normalize_val(prev, next);
+                    return !$mol_compare_deep(next_norm, prev);
+                }
+                catch (e) {
+                    $mol_fail_log(e);
+                    return prev ?? false;
+                }
             }
             state(next) {
-                return $mol_state_local.value(`${this}.state()`, next) ?? {};
+                return this.$.$mol_state_local.value(`${this}.state()`, next) ?? {};
             }
             changed() {
                 return Object.keys(this.state()).some(field => this.value_changed(field));
             }
-            submit_allowed() {
-                return this.changed() && super.submit_allowed();
-            }
             reset(next) {
                 this.state(null);
+            }
+            result(next) {
+                this.state();
+                if (next instanceof Error)
+                    next = next.message || this.message_invalid();
+                return next ?? '';
+            }
+            buttons() {
+                return [
+                    this.Submit(),
+                    ...this.changed() ? [this.Reset()] : [],
+                    ...this.result() ? [this.Result()] : [],
+                ];
             }
             submit(next) {
                 const tasks = Object.entries(this.state()).map(([field, next]) => () => {
@@ -11601,9 +11744,23 @@ var $;
                         next: normalize_val(prev, next)
                     };
                 });
-                const normalized = $mol_wire_race(...tasks);
-                $mol_wire_race(...normalized.map(({ field, next }) => () => this.model_pick(field, next)));
+                try {
+                    if (!this.submit_allowed()) {
+                        throw new Error(this.message_invalid());
+                    }
+                    const normalized = $mol_wire_race(...tasks);
+                    $mol_wire_race(...normalized.map(({ field, next }) => () => this.model_pick(field, next)));
+                }
+                catch (e) {
+                    if ($mol_promise_like(e))
+                        $mol_fail_hidden(e);
+                    $mol_fail_log(e);
+                    this.result(e);
+                    return false;
+                }
                 this.reset();
+                this.result(this.message_done());
+                return true;
             }
         }
         __decorate([
@@ -11634,6 +11791,12 @@ var $;
             $mol_mem
         ], $mol_form_draft.prototype, "changed", null);
         __decorate([
+            $mol_mem
+        ], $mol_form_draft.prototype, "result", null);
+        __decorate([
+            $mol_mem
+        ], $mol_form_draft.prototype, "buttons", null);
+        __decorate([
             $mol_action
         ], $mol_form_draft.prototype, "submit", null);
         $$.$mol_form_draft = $mol_form_draft;
@@ -11644,7 +11807,12 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/form/draft/draft.view.css", "[mol_form_draft] {\n\twidth: 100%;\n}\n");
+    var $$;
+    (function ($$) {
+        $mol_style_define($mol_form_draft, {
+            width: '100%',
+        });
+    })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
 ;

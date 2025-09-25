@@ -228,6 +228,8 @@
     "$mol_row",
     "$mol_form_field",
     "$mol_labeler",
+    "$mol_icon_restore",
+    "$mol_status",
     "$mol_wire_race",
     "$mol_format",
     "$money_app_caravan",
