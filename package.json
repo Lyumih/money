@@ -236,6 +236,8 @@
     "$money_app_caravan",
     "$money_app_god",
     "$mol_fetch",
+    "$mol_rest_code",
+    "$mol_rest",
     "$mol_dom_parse"
   ],
   "dependencies": {

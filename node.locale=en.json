@@ -1,8 +1,8 @@
 {
 	"$mol_book2_catalog_Spread_close_hint": "Close page",
 	"$mol_form_draft_reset_title": "Reset",
+	"$mol_form_form_invalid": "Form is not valid",
 	"$mol_form_message_done": "Saved",
-	"$mol_form_message_invalid": "Form is not valid",
 	"$mol_form_submit_title": "Save",
 	"$mol_link_source_hint": "Source code",
 	"$mol_search_Clear_hint": "Clear",
