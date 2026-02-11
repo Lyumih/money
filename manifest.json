@@ -1,0 +1,10 @@
+{
+	"name": "money_app",
+	"short_name": "money_app",
+	"description": "",
+	"id": "money_app",
+	"start_url": ".",
+	"display": "standalone",
+	"background_color": "#000000",
+	"theme_color": "#000000"
+}
